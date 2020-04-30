@@ -1,8 +1,8 @@
-'''
+"""
 Created on 25 août 2017
 
 @author: julien
-'''
+"""
 
 from flask import Flask
 from flask_restful import Api, Resource
@@ -17,124 +17,124 @@ API = Api(APP)
 GRAPH = Graph()
 
 class Genres(Resource):
-    '''
+    """
     Liste des genres
-    '''
+    """
     # pylint: disable=R0201
     def get(self):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.genre_list(), HEADERS
 
 class Styles(Resource):
-    '''
+    """
     Liste des styles
-    '''
+    """
     # pylint: disable=R0201
     def get(self):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.style_list(), HEADERS
 
 class GenresAlbums(Resource):
-    '''
+    """
     Liste des albums pour un genre
-    '''
+    """
     # pylint: disable=R0201
     def get(self, genre_name):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.album_list(genre=genre_name), HEADERS
 
 class StylesAlbums(Resource):
-    '''
+    """
     Liste des albums pour  un style
-    '''
+    """
     # pylint: disable=R0201
     def get(self, style_name):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.album_list(style=style_name), HEADERS
 
 class Albums(Resource):
-    '''
+    """
     Liste des albums
-    '''
+    """
     # pylint: disable=R0201
     def get(self, album_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.album_list(album_id=int(album_id)), HEADERS
 
 class AlbumArtists(Resource):
-    '''
+    """
     Liste des artistes pour un album
-    '''
+    """
     # pylint: disable=R0201
     def get(self, album_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.artist_list(album_id=int(album_id)), HEADERS
 
 class AlbumGenres(Resource):
-    '''
+    """
     Liste des genres pou run album
-    '''
+    """
     # pylint: disable=R0201
     def get(self, album_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.genre_list(album_id=int(album_id)), HEADERS
 
 class AlbumStyles(Resource):
-    '''
+    """
     Liste des styles pour un album
-    '''
+    """
     # pylint: disable=R0201
     def get(self, album_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.style_list(album_id=int(album_id)), HEADERS
 
 class Artists(Resource):
-    '''
+    """
     Liste des artistes
-    '''
+    """
     # pylint: disable=R0201
     def get(self, artist_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.artist_list(artist_id=int(artist_id)), HEADERS
 
 class ArtistAlbums(Resource):
-    '''
+    """
     Liste des album pour un artiste
-    '''
+    """
     # pylint: disable=R0201
     def get(self, artist_id):
-        '''
+        """
         GET
-        '''
+        """
         return GRAPH.album_list(artist_id=int(artist_id)), HEADERS
 
 class RolesHeads(Resource):
-    '''
+    """
     Liste des headers pour les roles
-    '''
+    """
     # pylint: disable=R0201
     def get(self, name, action):
-        '''
+        """
         GET
-        '''
+        """
         print("RolesHeads : name = ", name, " - action = ", action)
         if name == '-':
             return GRAPH.roles_heads(), HEADERS
@@ -142,14 +142,14 @@ class RolesHeads(Resource):
         return GRAPH.roles_heads(name, action), HEADERS
         
 class RolesSubHeads(Resource):
-    '''
+    """
     Liste des subheaders pour les roles
-    '''
+    """
     # pylint: disable=R0201
     def get(self, name, action):
-        '''
+        """
         GET
-        '''
+        """
         print("RolesSubHeads : name = ", name, " - action = ", action)
 
         if name == '-':
@@ -158,14 +158,14 @@ class RolesSubHeads(Resource):
         return GRAPH.roles_subheads(name), HEADERS
 
 class RolesCredits(Resource):
-    '''
+    """
     Liste des credits pour les roles
-    '''
+    """
     # pylint: disable=R0201
     def get(self, name, action):
-        '''
+        """
         GET
-        '''
+        """
         print("RolesCredits : name = ", name, " - action = ", action)
 
         if name == '-':
@@ -174,27 +174,27 @@ class RolesCredits(Resource):
         return GRAPH.roles_credits(name), HEADERS
 
 class InitDB(Resource):
-    '''
+    """
     Reinitialisation de la bdd
-    '''
+    """
     # pylint: disable=R0201
     def get(self):
-        '''
+        """
         GET
-        '''
+        """
         GRAPH.reset()
         analyze(GRAPH)
         return {'result': 'OK'}, HEADERS
 
 class RefreshDB(Resource):
-    '''
+    """
     Rafraîchissement des métadonnées
-    '''
+    """
     # pylint: disable=R0201
     def get(self):
-        '''
+        """
         GET
-        '''
+        """
         print("RefreshDB")
         refresh_metas(GRAPH)
         return {'result': 'OK'}, HEADERS

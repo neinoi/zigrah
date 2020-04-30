@@ -1,0 +1,4 @@
+pip3 install flask flask_restful
+pip3 install grapheekdb
+aptitude install python3-kyotocabinet
+pip3 install eyed3
